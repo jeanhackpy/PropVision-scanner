@@ -1,0 +1,9 @@
+{
+  "name": "Property-Scanner-investment",
+  "description": "Hyper-local real estate platform with one-click pinpoint zone selection. Aggregates and pre-processes property listings (rental & sale) from multiple agents. Features AI-powered reverse image search (like Google Lens) to select a building via photo + GPS, extract all its listings, and display top-rated elite agents with a built-in review system.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
