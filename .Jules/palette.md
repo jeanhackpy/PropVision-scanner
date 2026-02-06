@@ -1,0 +1,3 @@
+## 2025-05-22 - [Accessibility Polish & Entry Point Fix]
+**Learning:** Icon-only buttons were consistently missing ARIA labels and focus indicators. The bottom sheet handle pattern used a non-semantic `div` for interaction, which is inaccessible to keyboard users. Additionally, the Vite entry point was missing from `index.html`, preventing the app from loading.
+**Action:** Always provide `aria-label` for icon-only buttons, use semantic `button` elements for interactive handles, and ensure `index.html` correctly references the entry point (e.g., `<script type="module" src="/index.tsx"></script>`).
