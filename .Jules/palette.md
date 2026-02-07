@@ -1,0 +1,3 @@
+## 2025-05-15 - [Accessibility Polish & Environment Fixes]
+**Learning:** In projects using Vite and Google GenAI, ensure the entry point is correctly linked in index.html and handle missing API keys gracefully to prevent the app from failing to load, which is the ultimate UX failure. ARIA labels and focus management for modals are essential micro-UX touches that significantly improve inclusivity with minimal code changes.
+**Action:** Always check the browser console for initialization errors that might block the UI from rendering, and use standard ARIA roles for modals and interactive elements.
