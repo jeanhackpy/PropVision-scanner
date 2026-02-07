@@ -17,6 +17,18 @@ function App() {
   const [showIntro, setShowIntro] = useState(true);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const introButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (showIntro) {
+      introButtonRef.current?.focus();
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setShowIntro(false);
+      };
+      window.addEventListener('keydown', handleEscape);
+      return () => window.removeEventListener('keydown', handleEscape);
+    }
+  }, [showIntro]);
 
   // Initialize with all properties shown for demo, but "filtered" when pinned
   useEffect(() => {
@@ -89,7 +101,7 @@ function App() {
             </div>
             <h1 className="font-bold text-xl tracking-tight text-slate-800">Immo<span className="text-indigo-600">Scan</span></h1>
         </div>
-        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full">
+        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full" aria-label="Menu">
             <Menu className="w-6 h-6" />
         </button>
       </header>
@@ -107,9 +119,13 @@ function App() {
            
            {/* Map Overlay: Listings Bottom Sheet */}
            <div className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] transition-transform duration-300 transform ${pinLocation ? 'translate-y-0' : 'translate-y-[85%]' } h-[60%] flex flex-col`}>
-             <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setPinLocation(null)}>
-                <div className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer"></div>
-             </div>
+             <button
+                className="w-full flex justify-center pt-3 pb-4 group"
+                onClick={() => setPinLocation(null)}
+                aria-label="Close listings"
+             >
+                <div className="w-12 h-1.5 bg-slate-200 rounded-full group-hover:bg-slate-300 transition-colors"></div>
+             </button>
              
              <div className="px-5 py-3 border-b border-slate-100 flex justify-between items-center">
                 <h2 className="font-bold text-slate-800 text-lg">
@@ -145,7 +161,11 @@ function App() {
                 <Camera className="w-5 h-5 text-indigo-600" />
                 Scan de Résidence
               </h2>
-              <button onClick={() => setView('map')} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200">
+              <button
+                onClick={() => setView('map')}
+                className="p-2 bg-slate-100 rounded-full hover:bg-slate-200"
+                aria-label="Close visual search"
+              >
                 <X className="w-5 h-5" />
               </button>
            </div>
@@ -269,6 +289,7 @@ function App() {
             <button 
                 onClick={() => setView('visual')}
                 className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50"
+                aria-label="Scan building"
             >
                 <Camera className="w-7 h-7" />
             </button>
@@ -285,16 +306,22 @@ function App() {
       
       {/* Intro Modal / Tooltip */}
       {showIntro && (
-        <div className="absolute inset-0 z-50 bg-black/50 flex items-center justify-center p-6 backdrop-blur-sm">
+        <div
+          className="absolute inset-0 z-50 bg-black/50 flex items-center justify-center p-6 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="intro-title"
+        >
             <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-fade-in-up">
                 <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 mx-auto">
                     <MapPin className="w-6 h-6" />
                 </div>
-                <h2 className="text-xl font-bold text-center mb-2">Recherche Hyper-Localisée</h2>
+                <h2 id="intro-title" className="text-xl font-bold text-center mb-2">Recherche Hyper-Localisée</h2>
                 <p className="text-center text-slate-600 mb-6 text-sm">
                     Cliquez n'importe où sur la carte pour définir instantanément votre zone de recherche. Utilisez le scanner pour identifier des résidences.
                 </p>
                 <button 
+                    ref={introButtonRef}
                     onClick={() => setShowIntro(false)}
                     className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors"
                 >
