@@ -85,12 +85,15 @@ function App() {
       <header className="bg-white/90 backdrop-blur-md z-30 border-b border-slate-200 px-4 py-3 flex justify-between items-center sticky top-0">
         <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
-                <Building className="w-5 h-5" />
+                <Building className="w-5 h-5" aria-hidden="true" />
             </div>
             <h1 className="font-bold text-xl tracking-tight text-slate-800">Immo<span className="text-indigo-600">Scan</span></h1>
         </div>
-        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full">
-            <Menu className="w-6 h-6" />
+        <button
+            className="p-2 text-slate-600 hover:bg-slate-100 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+            aria-label="Menu"
+        >
+            <Menu className="w-6 h-6" aria-hidden="true" />
         </button>
       </header>
 
@@ -142,11 +145,15 @@ function App() {
         <div className={`absolute inset-0 bg-white z-20 flex flex-col transition-transform duration-300 ${view === 'visual' ? 'translate-x-0' : 'translate-x-full'}`}>
            <div className="p-4 border-b border-slate-100 flex items-center justify-between">
               <h2 className="font-bold text-lg flex items-center gap-2">
-                <Camera className="w-5 h-5 text-indigo-600" />
+                <Camera className="w-5 h-5 text-indigo-600" aria-hidden="true" />
                 Scan de Résidence
               </h2>
-              <button onClick={() => setView('map')} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200">
-                <X className="w-5 h-5" />
+              <button
+                onClick={() => setView('map')}
+                className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+                aria-label="Fermer le scan"
+              >
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
            </div>
 
@@ -156,7 +163,7 @@ function App() {
               {!analysisResult && !isAnalyzing && (
                   <div className="border-2 border-dashed border-slate-300 rounded-2xl p-8 flex flex-col items-center justify-center text-center bg-slate-50 min-h-[300px]">
                      <div className="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600">
-                        <Sparkles className="w-10 h-10" />
+                        <Sparkles className="w-10 h-10" aria-hidden="true" />
                      </div>
                      <h3 className="font-bold text-slate-800 text-lg mb-2">Analysez un immeuble</h3>
                      <p className="text-slate-500 mb-6 max-w-xs">
@@ -164,9 +171,10 @@ function App() {
                      </p>
                      <button 
                         onClick={() => fileInputRef.current?.click()}
-                        className="bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all flex items-center gap-2"
+                        className="bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                        aria-label="Prendre une photo de l'immeuble"
                      >
-                        <Camera className="w-5 h-5" />
+                        <Camera className="w-5 h-5" aria-hidden="true" />
                         Ouvrir la caméra
                      </button>
                      <input 
@@ -258,9 +266,10 @@ function App() {
       <nav className="bg-white border-t border-slate-200 px-6 py-2 flex justify-between items-center z-40 pb-safe">
         <button 
             onClick={() => setView('map')}
-            className={`flex flex-col items-center gap-1 ${view === 'map' ? 'text-indigo-600' : 'text-slate-400'}`}
+            className={`flex flex-col items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-lg p-1 ${view === 'map' ? 'text-indigo-600' : 'text-slate-400'}`}
+            aria-label="Explorer la carte"
         >
-            <Map className="w-6 h-6" />
+            <Map className="w-6 h-6" aria-hidden="true" />
             <span className="text-[10px] font-medium">Explorer</span>
         </button>
 
@@ -268,17 +277,19 @@ function App() {
         <div className="relative -top-6">
             <button 
                 onClick={() => setView('visual')}
-                className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50"
+                className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                aria-label="Scanner un immeuble"
             >
-                <Camera className="w-7 h-7" />
+                <Camera className="w-7 h-7" aria-hidden="true" />
             </button>
         </div>
 
         <button 
             onClick={() => {}} // Placeholder for favorites or profile
-            className="flex flex-col items-center gap-1 text-slate-400"
+            className="flex flex-col items-center gap-1 text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-lg p-1"
+            aria-label="Recherche"
         >
-            <Search className="w-6 h-6" />
+            <Search className="w-6 h-6" aria-hidden="true" />
             <span className="text-[10px] font-medium">Recherche</span>
         </button>
       </nav>
@@ -288,7 +299,7 @@ function App() {
         <div className="absolute inset-0 z-50 bg-black/50 flex items-center justify-center p-6 backdrop-blur-sm">
             <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-fade-in-up">
                 <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 mx-auto">
-                    <MapPin className="w-6 h-6" />
+                    <MapPin className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <h2 className="text-xl font-bold text-center mb-2">Recherche Hyper-Localisée</h2>
                 <p className="text-center text-slate-600 mb-6 text-sm">
@@ -296,7 +307,8 @@ function App() {
                 </p>
                 <button 
                     onClick={() => setShowIntro(false)}
-                    className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors"
+                    className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                    aria-label="Fermer l'introduction"
                 >
                     Compris !
                 </button>
