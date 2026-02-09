@@ -258,7 +258,9 @@ function App() {
       <nav className="bg-white border-t border-slate-200 px-6 py-2 flex justify-between items-center z-40 pb-safe">
         <button 
             onClick={() => setView('map')}
-            className={`flex flex-col items-center gap-1 ${view === 'map' ? 'text-indigo-600' : 'text-slate-400'}`}
+            aria-label="Explorer map"
+            aria-current={view === 'map' ? 'page' : undefined}
+            className={`flex flex-col items-center gap-1 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 ${view === 'map' ? 'text-indigo-600' : 'text-slate-400'}`}
         >
             <Map className="w-6 h-6" />
             <span className="text-[10px] font-medium">Explorer</span>
@@ -268,7 +270,8 @@ function App() {
         <div className="relative -top-6">
             <button 
                 onClick={() => setView('visual')}
-                className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50"
+                aria-label="Scan building"
+                className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-4"
             >
                 <Camera className="w-7 h-7" />
             </button>
@@ -276,7 +279,8 @@ function App() {
 
         <button 
             onClick={() => {}} // Placeholder for favorites or profile
-            className="flex flex-col items-center gap-1 text-slate-400"
+            aria-label="Search"
+            className="flex flex-col items-center gap-1 text-slate-400 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
         >
             <Search className="w-6 h-6" />
             <span className="text-[10px] font-medium">Recherche</span>
@@ -296,7 +300,8 @@ function App() {
                 </p>
                 <button 
                     onClick={() => setShowIntro(false)}
-                    className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors"
+                    aria-label="Understood"
+                    className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
                 >
                     Compris !
                 </button>
