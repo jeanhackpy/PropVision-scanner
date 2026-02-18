@@ -1,9 +1,23 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { BuildingAnalysis } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY;
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 export const analyzeBuildingImage = async (base64Image: string): Promise<BuildingAnalysis | null> => {
+  if (!ai) {
+    console.warn("Gemini API key not found, using simulation mode.");
+    // Simulate a delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    return {
+      architecturalStyle: "Style Haussmannien",
+      estimatedEra: "Fin 19ème",
+      condition: "Très bon état",
+      luxuryLevel: "Luxe",
+      detectedFeatures: ["Balcons filants", "Pierre de taille", "Corniches ornées"]
+    };
+  }
+
   try {
     const model = 'gemini-2.5-flash-image'; 
     // Using a specific model optimized for speed and image understanding in this context
