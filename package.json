@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "pnpm build",
+    "lint": "pnpm exec tsc --noEmit"
   },
   "dependencies": {
     "react": "^19.2.4",
