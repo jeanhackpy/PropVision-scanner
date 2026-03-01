@@ -14,7 +14,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, agent, isAiMatch 
       {isAiMatch && (
         <div className="absolute top-3 left-3 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-full z-10 shadow-lg flex items-center gap-1">
           <Star className="w-3 h-3 fill-current" />
-          TOP MATCH
+          MEILLEURE CORRESPONDANCE
         </div>
       )}
       <div className="h-48 overflow-hidden relative">
