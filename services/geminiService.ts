@@ -1,9 +1,14 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { BuildingAnalysis } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+const ai = apiKey && apiKey !== 'undefined' ? new GoogleGenAI({ apiKey }) : null;
 
 export const analyzeBuildingImage = async (base64Image: string): Promise<BuildingAnalysis | null> => {
+  if (!ai) {
+    console.warn("AI service not initialized: Missing API Key");
+    return null;
+  }
   try {
     const model = 'gemini-2.5-flash-image'; 
     // Using a specific model optimized for speed and image understanding in this context
