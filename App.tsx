@@ -89,7 +89,10 @@ function App() {
             </div>
             <h1 className="font-bold text-xl tracking-tight text-slate-800">Immo<span className="text-indigo-600">Scan</span></h1>
         </div>
-        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full">
+        <button
+            className="p-2 text-slate-600 hover:bg-slate-100 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+            aria-label="Menu principal"
+        >
             <Menu className="w-6 h-6" />
         </button>
       </header>
@@ -107,8 +110,12 @@ function App() {
            
            {/* Map Overlay: Listings Bottom Sheet */}
            <div className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] transition-transform duration-300 transform ${pinLocation ? 'translate-y-0' : 'translate-y-[85%]' } h-[60%] flex flex-col`}>
-             <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setPinLocation(null)}>
-                <div className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer"></div>
+             <div className="w-full flex justify-center pt-3 pb-1">
+                <button
+                    className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer hover:bg-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-4 group"
+                    onClick={() => setPinLocation(null)}
+                    aria-label="Réduire la liste"
+                ></button>
              </div>
              
              <div className="px-5 py-3 border-b border-slate-100 flex justify-between items-center">
@@ -145,7 +152,11 @@ function App() {
                 <Camera className="w-5 h-5 text-indigo-600" />
                 Scan de Résidence
               </h2>
-              <button onClick={() => setView('map')} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200">
+              <button
+                onClick={() => setView('map')}
+                className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                aria-label="Fermer le scan"
+              >
                 <X className="w-5 h-5" />
               </button>
            </div>
@@ -258,7 +269,8 @@ function App() {
       <nav className="bg-white border-t border-slate-200 px-6 py-2 flex justify-between items-center z-40 pb-safe">
         <button 
             onClick={() => setView('map')}
-            className={`flex flex-col items-center gap-1 ${view === 'map' ? 'text-indigo-600' : 'text-slate-400'}`}
+            className={`flex flex-col items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-lg px-2 py-1 ${view === 'map' ? 'text-indigo-600' : 'text-slate-400'}`}
+            aria-label="Carte des propriétés"
         >
             <Map className="w-6 h-6" />
             <span className="text-[10px] font-medium">Explorer</span>
@@ -268,7 +280,8 @@ function App() {
         <div className="relative -top-6">
             <button 
                 onClick={() => setView('visual')}
-                className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50"
+                className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                aria-label="Scanner un immeuble"
             >
                 <Camera className="w-7 h-7" />
             </button>
@@ -276,7 +289,8 @@ function App() {
 
         <button 
             onClick={() => {}} // Placeholder for favorites or profile
-            className="flex flex-col items-center gap-1 text-slate-400"
+            className="flex flex-col items-center gap-1 text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-lg px-2 py-1"
+            aria-label="Rechercher une propriété"
         >
             <Search className="w-6 h-6" />
             <span className="text-[10px] font-medium">Recherche</span>
