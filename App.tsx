@@ -129,11 +129,26 @@ function App() {
                         <p>Cliquez sur la carte pour activer le <br/> Pin-Point Search™</p>
                     </div>
                 )}
-                {pinLocation && properties.map(prop => (
-                    <div key={prop.id} className="h-auto">
-                        <PropertyCard property={prop} agent={getAgent(prop.agentId)} />
-                    </div>
-                ))}
+                {pinLocation && (
+                    <>
+                        <div className="space-y-4">
+                            {properties.map(prop => (
+                                <div key={prop.id} className="h-auto">
+                                    <PropertyCard property={prop} agent={getAgent(prop.agentId)} />
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="pt-4 border-t border-slate-100">
+                            <h3 className="font-bold text-slate-800 text-sm mb-3">Agents recommandés</h3>
+                            <div className="space-y-3">
+                                {MOCK_AGENTS.slice(0, 2).map(agent => (
+                                    <AgentCard key={agent.id} agent={agent} />
+                                ))}
+                            </div>
+                        </div>
+                    </>
+                )}
              </div>
            </div>
         </div>
