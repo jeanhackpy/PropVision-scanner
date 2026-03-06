@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Agent } from '../types';
-import { Star, ShieldCheck, Phone } from 'lucide-react';
+import { Star, ShieldCheck, Phone, Check } from 'lucide-react';
 
 interface AgentCardProps {
   agent: Agent;
 }
 
 const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleContact = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+        navigator.clipboard.writeText(agent.phone);
+    } catch (err) {
+        console.error("Failed to copy phone number:", err);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4">
       <div className="relative">
@@ -39,9 +52,24 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           ))}
         </div>
 
-        <button className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
-          <Phone className="w-3 h-3" />
-          Contacter
+        <button
+          onClick={handleContact}
+          aria-label={copied ? "Numéro copié" : `Contacter ${agent.name}`}
+          className={`w-full text-center text-xs py-1.5 rounded flex items-center justify-center gap-2 transition-colors ${
+            copied ? 'bg-green-600 text-white' : 'bg-slate-900 text-white hover:bg-slate-800'
+          }`}
+        >
+          {copied ? (
+            <>
+              <Check className="w-3 h-3" />
+              <span>Copié !</span>
+            </>
+          ) : (
+            <>
+              <Phone className="w-3 h-3" />
+              <span>Contacter</span>
+            </>
+          )}
         </button>
       </div>
     </div>
