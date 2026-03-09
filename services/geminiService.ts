@@ -1,7 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { BuildingAnalysis } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY === 'undefined' ? undefined : process.env.API_KEY;
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 export const analyzeBuildingImage = async (base64Image: string): Promise<BuildingAnalysis | null> => {
   try {
@@ -17,6 +18,11 @@ export const analyzeBuildingImage = async (base64Image: string): Promise<Buildin
       - luxuryLevel: Une estimation du standing (Standard, Premium, Luxe).
       - detectedFeatures: Une liste de caractéristiques visibles (ex: Balcon, Grande fenêtre, Pierre de taille).
     `;
+
+    if (!ai) {
+        console.warn("AI Service not initialized - missing API Key");
+        return null;
+    }
 
     const response = await ai.models.generateContent({
       model: model,

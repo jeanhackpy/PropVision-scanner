@@ -89,7 +89,7 @@ function App() {
             </div>
             <h1 className="font-bold text-xl tracking-tight text-slate-800">Immo<span className="text-indigo-600">Scan</span></h1>
         </div>
-        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full">
+        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full" aria-label="Menu principal">
             <Menu className="w-6 h-6" />
         </button>
       </header>
@@ -107,9 +107,13 @@ function App() {
            
            {/* Map Overlay: Listings Bottom Sheet */}
            <div className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] transition-transform duration-300 transform ${pinLocation ? 'translate-y-0' : 'translate-y-[85%]' } h-[60%] flex flex-col`}>
-             <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setPinLocation(null)}>
-                <div className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer"></div>
-             </div>
+             <button
+                className="w-full flex justify-center pt-3 pb-1 group focus-visible:outline-none"
+                onClick={() => setPinLocation(null)}
+                aria-label="Réduire la liste"
+             >
+                <div className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer group-focus-visible:ring-2 group-focus-visible:ring-indigo-500 group-focus-visible:ring-offset-2"></div>
+             </button>
              
              <div className="px-5 py-3 border-b border-slate-100 flex justify-between items-center">
                 <h2 className="font-bold text-slate-800 text-lg">
@@ -145,7 +149,7 @@ function App() {
                 <Camera className="w-5 h-5 text-indigo-600" />
                 Scan de Résidence
               </h2>
-              <button onClick={() => setView('map')} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200">
+              <button onClick={() => setView('map')} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200" aria-label="Fermer le scan">
                 <X className="w-5 h-5" />
               </button>
            </div>
@@ -286,11 +290,16 @@ function App() {
       {/* Intro Modal / Tooltip */}
       {showIntro && (
         <div className="absolute inset-0 z-50 bg-black/50 flex items-center justify-center p-6 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-fade-in-up">
+            <div
+                className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-fade-in-up"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-title"
+            >
                 <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-indigo-600 mx-auto">
                     <MapPin className="w-6 h-6" />
                 </div>
-                <h2 className="text-xl font-bold text-center mb-2">Recherche Hyper-Localisée</h2>
+                <h2 id="modal-title" className="text-xl font-bold text-center mb-2">Recherche Hyper-Localisée</h2>
                 <p className="text-center text-slate-600 mb-6 text-sm">
                     Cliquez n'importe où sur la carte pour définir instantanément votre zone de recherche. Utilisez le scanner pour identifier des résidences.
                 </p>
