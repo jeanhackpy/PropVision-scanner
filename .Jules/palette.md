@@ -1,0 +1,3 @@
+## 2025-05-14 - [A11y Patterns for Non-Standard Components]
+**Learning:** Interactive areas like simulated maps must explicitly implement keyboard navigation (tabIndex, role="button", onKeyDown) to be accessible. Interaction handles for bottom sheets should be semantic buttons that are disabled when redundant (e.g., when the sheet is already minimized) to prevent screen reader confusion and improve focus management.
+**Action:** Always wrap custom interactive regions with proper ARIA roles and keyboard listeners. Use semantic `<button>` elements for handles and implement conditional `disabled` states based on the UI state.
