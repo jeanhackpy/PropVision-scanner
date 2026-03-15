@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { BuildingAnalysis } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: (process.env.API_KEY && process.env.API_KEY !== 'undefined') ? process.env.API_KEY : 'dummy-key' });
 
 export const analyzeBuildingImage = async (base64Image: string): Promise<BuildingAnalysis | null> => {
   try {
