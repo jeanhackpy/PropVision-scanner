@@ -89,7 +89,10 @@ function App() {
             </div>
             <h1 className="font-bold text-xl tracking-tight text-slate-800">Immo<span className="text-indigo-600">Scan</span></h1>
         </div>
-        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full">
+        <button
+            aria-label="Menu principal"
+            className="p-2 text-slate-600 hover:bg-slate-100 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+        >
             <Menu className="w-6 h-6" />
         </button>
       </header>
@@ -107,8 +110,13 @@ function App() {
            
            {/* Map Overlay: Listings Bottom Sheet */}
            <div className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] transition-transform duration-300 transform ${pinLocation ? 'translate-y-0' : 'translate-y-[85%]' } h-[60%] flex flex-col`}>
-             <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setPinLocation(null)}>
-                <div className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer"></div>
+             <div className="w-full flex justify-center pt-3 pb-1">
+                <button
+                  aria-label="Réduire la liste"
+                  disabled={!pinLocation}
+                  className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer hover:bg-slate-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-4 disabled:cursor-default"
+                  onClick={() => setPinLocation(null)}
+                ></button>
              </div>
              
              <div className="px-5 py-3 border-b border-slate-100 flex justify-between items-center">
