@@ -1,0 +1,3 @@
+## 2025-05-15 - [Accessibility & Localization Polish]
+**Learning:** Custom interactive components like maps often lack keyboard support. Adding `role="button"`, `tabIndex={0}`, and `onKeyDown` handlers with `focus-visible` rings is essential for accessibility. Additionally, semantic HTML (changing `div` to `button`) and proper ARIA labels improve the experience for screen reader users. Graceful fallback for missing AI service keys prevents app-breaking runtime errors in restricted environments.
+**Action:** Always audit custom interactive components for keyboard reachability and use semantic elements over `div`s for interactions. Implement `aria-label` for all icon-only buttons.
