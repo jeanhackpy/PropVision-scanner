@@ -1,0 +1,3 @@
+## 2025-05-15 - Interactive Map Accessibility
+**Learning:** Interactive map visualizations often use `div` elements for simplicity, but they must be explicitly made keyboard-accessible by adding `role="button"`, `tabIndex={0}`, and a descriptive `aria-label`. To preserve visual design on mobile while ensuring accessibility, use `focus-visible:ring-inset` to contain the focus indicator within the map boundaries.
+**Action:** When creating or modifying map-like interactive containers, always implement `onKeyDown` handlers for Space/Enter keys and use `focus-visible:ring-inset` for large edge-to-edge components.
