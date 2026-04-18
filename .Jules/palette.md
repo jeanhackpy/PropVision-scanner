@@ -1,0 +1,3 @@
+## 2025-05-15 - Interactive Map Accessibility
+**Learning:** Interactive maps implemented as `div` containers are often skipped by screen readers and keyboard users. Adding `role="button"` and `tabIndex={0}` is essential for making them discoverable. Furthermore, for large interactive elements that span to the edge of the viewport, using `focus-visible:ring-inset` ensures the focus indicator remains fully visible and doesn't get clipped.
+**Action:** Always include keyboard event handlers (`onKeyDown`) and semantic ARIA roles when creating custom interactive components like maps or canvas areas. Use inset rings for focus states on full-width/height elements.
