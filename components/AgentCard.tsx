@@ -39,7 +39,7 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           ))}
         </div>
 
-        <button className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
+        <button type="button" className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2">
           <Phone className="w-3 h-3" />
           Contacter
         </button>
