@@ -16,8 +16,37 @@ const SimulatedMap: React.FC<SimulatedMapProps> = ({ onPinDrop, isPinDropped, pi
     onPinDrop(x, y);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onPinDrop(50, 50); // Drop in the center for keyboard users as a starting point
+      return;
+    }
+
+    if (isPinDropped && pinPosition) {
+      let { x, y } = pinPosition;
+      const step = 2; // 2% movement step
+
+      if (e.key === 'ArrowLeft') x = Math.max(0, x - step);
+      else if (e.key === 'ArrowRight') x = Math.min(100, x + step);
+      else if (e.key === 'ArrowUp') y = Math.max(0, y - step);
+      else if (e.key === 'ArrowDown') y = Math.min(100, y + step);
+      else return;
+
+      e.preventDefault();
+      onPinDrop(x, y);
+    }
+  };
+
   return (
-    <div className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair" onClick={handleMapClick}>
+    <div
+      className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair focus-visible:ring-4 focus-visible:ring-indigo-500 focus-visible:ring-inset outline-none"
+      onClick={handleMapClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label="Placer un marqueur sur la carte"
+    >
       {/* Background simulating a map style */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
