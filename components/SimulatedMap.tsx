@@ -16,8 +16,38 @@ const SimulatedMap: React.FC<SimulatedMapProps> = ({ onPinDrop, isPinDropped, pi
     onPinDrop(x, y);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onPinDrop(50, 50);
+    } else if (isPinDropped && pinPosition) {
+      const step = 2;
+      let newX = pinPosition.x;
+      let newY = pinPosition.y;
+
+      if (e.key === 'ArrowLeft') newX -= step;
+      else if (e.key === 'ArrowRight') newX += step;
+      else if (e.key === 'ArrowUp') newY -= step;
+      else if (e.key === 'ArrowDown') newY += step;
+      else return;
+
+      e.preventDefault();
+      onPinDrop(
+        Math.max(0, Math.min(100, newX)),
+        Math.max(0, Math.min(100, newY))
+      );
+    }
+  };
+
   return (
-    <div className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair" onClick={handleMapClick}>
+    <div
+      className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-600 focus-visible:ring-inset"
+      onClick={handleMapClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label="Carte interactive. Appuyez sur Entrée pour placer un marqueur au centre ou utilisez les flèches pour le déplacer."
+    >
       {/* Background simulating a map style */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
