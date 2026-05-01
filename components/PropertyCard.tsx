@@ -12,9 +12,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, agent, isAiMatch 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col h-full relative">
       {isAiMatch && (
-        <div className="absolute top-3 left-3 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-full z-10 shadow-lg flex items-center gap-1">
+        <div className="absolute top-3 left-3 bg-indigo-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-10 shadow-lg flex items-center gap-1 uppercase tracking-wider">
           <Star className="w-3 h-3 fill-current" />
-          TOP MATCH
+          MEILLEURE CORRESPONDANCE
         </div>
       )}
       <div className="h-48 overflow-hidden relative">
