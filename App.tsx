@@ -89,7 +89,11 @@ function App() {
             </div>
             <h1 className="font-bold text-xl tracking-tight text-slate-800">Immo<span className="text-indigo-600">Scan</span></h1>
         </div>
-        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full">
+        <button
+            type="button"
+            aria-label="Menu principal"
+            className="p-2 text-slate-600 hover:bg-slate-100 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+        >
             <Menu className="w-6 h-6" />
         </button>
       </header>
@@ -107,9 +111,15 @@ function App() {
            
            {/* Map Overlay: Listings Bottom Sheet */}
            <div className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] transition-transform duration-300 transform ${pinLocation ? 'translate-y-0' : 'translate-y-[85%]' } h-[60%] flex flex-col`}>
-             <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setPinLocation(null)}>
-                <div className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer"></div>
-             </div>
+             <button
+                type="button"
+                aria-label="Réinitialiser la zone"
+                disabled={!pinLocation}
+                className="w-full flex justify-center pt-3 pb-1 focus-visible:outline-none group"
+                onClick={() => setPinLocation(null)}
+             >
+                <div className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer group-focus-visible:ring-2 group-focus-visible:ring-indigo-500"></div>
+             </button>
              
              <div className="px-5 py-3 border-b border-slate-100 flex justify-between items-center">
                 <h2 className="font-bold text-slate-800 text-lg">
@@ -145,7 +155,12 @@ function App() {
                 <Camera className="w-5 h-5 text-indigo-600" />
                 Scan de Résidence
               </h2>
-              <button onClick={() => setView('map')} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200">
+              <button
+                type="button"
+                aria-label="Fermer le scan"
+                onClick={() => setView('map')}
+                className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+              >
                 <X className="w-5 h-5" />
               </button>
            </div>
@@ -163,8 +178,9 @@ function App() {
                         Prenez une photo pour identifier le style, le standing et trouver les agents "Elite" de cette résidence.
                      </p>
                      <button 
+                        type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all flex items-center gap-2"
+                        className="bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
                      >
                         <Camera className="w-5 h-5" />
                         Ouvrir la caméra
@@ -242,8 +258,9 @@ function App() {
                       </div>
                       
                       <button 
+                        type="button"
                         onClick={() => { setAnalysisResult(null); setView('visual'); }}
-                        className="w-full py-3 bg-white border border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-50"
+                        className="w-full py-3 bg-white border border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                       >
                         Scanner un autre bâtiment
                       </button>
@@ -257,8 +274,9 @@ function App() {
       {/* Bottom Navigation */}
       <nav className="bg-white border-t border-slate-200 px-6 py-2 flex justify-between items-center z-40 pb-safe">
         <button 
+            type="button"
             onClick={() => setView('map')}
-            className={`flex flex-col items-center gap-1 ${view === 'map' ? 'text-indigo-600' : 'text-slate-400'}`}
+            className={`flex flex-col items-center gap-1 focus-visible:outline-none focus-visible:text-indigo-600 ${view === 'map' ? 'text-indigo-600' : 'text-slate-400'}`}
         >
             <Map className="w-6 h-6" />
             <span className="text-[10px] font-medium">Explorer</span>
@@ -267,16 +285,19 @@ function App() {
         {/* Floating Action Button for Scan */}
         <div className="relative -top-6">
             <button 
+                type="button"
+                aria-label="Scanner un immeuble"
                 onClick={() => setView('visual')}
-                className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50"
+                className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center text-white shadow-lg shadow-slate-400/50 hover:scale-105 transition-transform border-4 border-slate-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500"
             >
                 <Camera className="w-7 h-7" />
             </button>
         </div>
 
         <button 
+            type="button"
             onClick={() => {}} // Placeholder for favorites or profile
-            className="flex flex-col items-center gap-1 text-slate-400"
+            className="flex flex-col items-center gap-1 focus-visible:outline-none focus-visible:text-indigo-600 text-slate-400"
         >
             <Search className="w-6 h-6" />
             <span className="text-[10px] font-medium">Recherche</span>
@@ -295,8 +316,9 @@ function App() {
                     Cliquez n'importe où sur la carte pour définir instantanément votre zone de recherche. Utilisez le scanner pour identifier des résidences.
                 </p>
                 <button 
+                    type="button"
                     onClick={() => setShowIntro(false)}
-                    className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors"
+                    className="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
                 >
                     Compris !
                 </button>
