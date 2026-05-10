@@ -11,13 +11,50 @@ const SimulatedMap: React.FC<SimulatedMapProps> = ({ onPinDrop, isPinDropped, pi
   
   const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
     onPinDrop(x, y);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (!isPinDropped) {
+        onPinDrop(50, 50);
+      }
+    } else if (isPinDropped && pinPosition) {
+      const step = 2;
+      let newX = pinPosition.x;
+      let newY = pinPosition.y;
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        newY = Math.max(0, pinPosition.y - step);
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        newY = Math.min(100, pinPosition.y + step);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        newX = Math.max(0, pinPosition.x - step);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        newX = Math.min(100, pinPosition.x + step);
+      } else {
+        return;
+      }
+      onPinDrop(newX, newY);
+    }
+  };
+
   return (
-    <div className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair" onClick={handleMapClick}>
+    <div
+      className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-inset"
+      onClick={handleMapClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label="Placer un marqueur sur la carte"
+    >
       {/* Background simulating a map style */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
