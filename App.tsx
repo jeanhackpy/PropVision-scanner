@@ -89,7 +89,7 @@ function App() {
             </div>
             <h1 className="font-bold text-xl tracking-tight text-slate-800">Immo<span className="text-indigo-600">Scan</span></h1>
         </div>
-        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full">
+        <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full" aria-label="Menu principal">
             <Menu className="w-6 h-6" />
         </button>
       </header>
@@ -107,8 +107,13 @@ function App() {
            
            {/* Map Overlay: Listings Bottom Sheet */}
            <div className={`absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] transition-transform duration-300 transform ${pinLocation ? 'translate-y-0' : 'translate-y-[85%]' } h-[60%] flex flex-col`}>
-             <div className="w-full flex justify-center pt-3 pb-1" onClick={() => setPinLocation(null)}>
-                <div className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer"></div>
+             <div className="w-full flex justify-center pt-3 pb-1">
+                <button
+                  type="button"
+                  className="w-12 h-1.5 bg-slate-200 rounded-full cursor-pointer hover:bg-slate-300 transition-colors"
+                  onClick={() => setPinLocation(null)}
+                  aria-label="Réinitialiser la zone"
+                />
              </div>
              
              <div className="px-5 py-3 border-b border-slate-100 flex justify-between items-center">
@@ -145,7 +150,7 @@ function App() {
                 <Camera className="w-5 h-5 text-indigo-600" />
                 Scan de Résidence
               </h2>
-              <button onClick={() => setView('map')} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200">
+              <button onClick={() => setView('map')} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200" aria-label="Fermer le scan">
                 <X className="w-5 h-5" />
               </button>
            </div>
@@ -163,8 +168,10 @@ function App() {
                         Prenez une photo pour identifier le style, le standing et trouver les agents "Elite" de cette résidence.
                      </p>
                      <button 
+                        type="button"
                         onClick={() => fileInputRef.current?.click()}
                         className="bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all flex items-center gap-2"
+                        aria-label="Scanner un immeuble"
                      >
                         <Camera className="w-5 h-5" />
                         Ouvrir la caméra
