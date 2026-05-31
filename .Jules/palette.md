@@ -1,0 +1,3 @@
+## 2025-05-15 - ARIA Label Language Consistency & Keyboard Map Navigation
+**Learning:** In projects with a localized UI (e.g., `lang="fr"` and French UI strings), ARIA labels must match the user-facing language even if the source code (props, variables) is in English. For map-based components, adding `tabIndex`, `role="button"`, and keyboard handlers for pin placement and movement provides a significant accessibility boost with minimal code.
+**Action:** Always check `index.html` for the `lang` attribute and match ARIA labels to the visible UI language. Use `Arrow` keys with clamping for intuitive keyboard navigation of coordinate-based elements.
