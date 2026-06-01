@@ -1,0 +1,3 @@
+## 2025-05-22 - [Map Accessibility & Entry Point Reliability]
+**Learning:** In React apps using Vite with `esm.sh` importmaps, the application may fail to mount if the entry point script is not explicitly placed after the root element in `index.html`. For micro-UX, making simulated maps keyboard-accessible requires providing a default interaction (e.g., Space/Enter to drop at 50, 50) and dynamic ARIA labels that reflect state changes.
+**Action:** Always ensure `index.html` has the correct module entry point and use state-aware `aria-label` and `onKeyDown` handlers for custom interactive components like maps.
