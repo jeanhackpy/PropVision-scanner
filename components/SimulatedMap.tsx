@@ -16,8 +16,44 @@ const SimulatedMap: React.FC<SimulatedMapProps> = ({ onPinDrop, isPinDropped, pi
     onPinDrop(x, y);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (!isPinDropped) {
+        onPinDrop(50, 50);
+      }
+    } else if (isPinDropped && pinPosition) {
+      const step = 2;
+      let { x, y } = pinPosition;
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        y = Math.max(0, y - step);
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        y = Math.min(100, y + step);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        x = Math.max(0, x - step);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        x = Math.min(100, x + step);
+      }
+
+      if (x !== pinPosition.x || y !== pinPosition.y) {
+        onPinDrop(x, y);
+      }
+    }
+  };
+
   return (
-    <div className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair" onClick={handleMapClick}>
+    <div
+      className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-indigo-600"
+      onClick={handleMapClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label={isPinDropped ? "Ajuster la position du marqueur" : "Placer un marqueur sur la carte"}
+    >
       {/* Background simulating a map style */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
