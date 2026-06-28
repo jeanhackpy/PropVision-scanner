@@ -1,0 +1,3 @@
+## 2025-05-15 - Accessibility for Non-Semantic Interactive Elements
+**Learning:** In this application, visual handles (like the bottom sheet bar) and custom regions (like the SimulatedMap) are used for core interactions but lack semantic meaning for screen readers and keyboard users. Applying `role="button"` or `role="region"`, `tabIndex={0}`, and `onKeyDown` handlers (supporting Enter/Space) is essential to ensure these interactions are discoverable and usable by all users.
+**Action:** Always verify if a visual element has an `onClick` handler; if so, wrap or enhance it with appropriate ARIA roles and keyboard listeners to maintain accessibility parity.
