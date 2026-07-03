@@ -1,0 +1,3 @@
+## 2025-05-15 - Interactive Map Accessibility
+**Learning:** When making a custom interactive component (like a simulated map) accessible, it must include `tabIndex={0}`, `role="application"` (or `button`), and an `onKeyDown` handler for Enter/Space keys. Additionally, ARIA labels must match the user-facing language of the application (French in this case) regardless of the source code's internal language.
+**Action:** Always implement keyboard handlers and language-appropriate ARIA labels for custom interactive surfaces. Use `focus-visible:ring-inset` for components with `overflow-hidden` to ensure the focus ring is visible.
