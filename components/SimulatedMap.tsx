@@ -17,7 +17,19 @@ const SimulatedMap: React.FC<SimulatedMapProps> = ({ onPinDrop, isPinDropped, pi
   };
 
   return (
-    <div className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair" onClick={handleMapClick}>
+    <div
+      className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-indigo-500 outline-none"
+      onClick={handleMapClick}
+      tabIndex={0}
+      role="region"
+      aria-label="Carte interactive. Appuyez sur Espace ou Entrée pour cibler le centre."
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onPinDrop(50, 50);
+        }
+      }}
+    >
       {/* Background simulating a map style */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
