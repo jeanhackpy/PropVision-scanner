@@ -1,0 +1,3 @@
+## 2025-07-17 - Keyboard Focus with Overflow Hidden
+**Learning:** When applying keyboard focus rings to interactive components that have `overflow-hidden` (such as a simulated map or full-bleed cards), standard focus indicators like `ring-offset` or default outer rings get clipped by the container boundaries, making the focus indicator invisible to keyboard users. Using `focus-visible:ring-inset` ensures the focus indicator is rendered inside the container boundaries and remains fully visible.
+**Action:** Use `focus-visible:ring-inset` with `outline-none` for elements with `overflow-hidden` to guarantee clear keyboard focus indicators.
