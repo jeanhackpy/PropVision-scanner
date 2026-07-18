@@ -1,0 +1,3 @@
+## 2025-07-18 - Semantic Telephone Contact Link
+**Learning:** For contact buttons representing telephone numbers (such as in AgentCard), replacing placeholder button components with a semantic anchor (<a>) wrapping a 'tel:' protocol leverages browser/device native dialers, providing seamless mobile integration and better native accessibility.
+**Action:** Use <a href="tel:..."> instead of <button> for phone-based actions, and supplement with clear aria-labels in the localized UI language detailing who is being called.
