@@ -1,0 +1,5 @@
+## 2024-07-21 - Keyboard Accessibility on Overflow-Hidden Interactive Maps
+
+**Learning:** When making simulated/interactive maps using container divs with `overflow: hidden`, they are completely inaccessible to keyboard-only and screen reader users without explicit interaction support. Adding `role="button"`, `tabIndex={0}`, and an accessible `aria-label` provides basic screen reader visibility and keyboard focus. However, because the container has `overflow-hidden`, standard keyboard focus rings (or those with `ring-offset`) are visually clipped by the boundaries of the container. Using `focus-visible:ring-inset` ensures that the focus ring is rendered inside the container's layout boundary, making the focused state clearly visible.
+
+**Action:** When adding interactive behaviors (like click/drop pins) to container divs with `overflow-hidden`, always implement `role="button"`, `tabIndex={0}`, an appropriate `onKeyDown` handler (with `e.preventDefault()` for Space/Enter), and apply Tailwind's `focus-visible:ring-inset` to keep focus indicators fully visible.
