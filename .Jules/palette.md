@@ -1,0 +1,3 @@
+## 2025-05-15 - Agent Contact Semantic Anchors
+**Learning:** For contact actions that trigger a phone call, using placeholder `<button>` elements limits the device's ability to trigger the native dialer. Wrapping the phone action in a semantic `<a>` anchor with the `tel:` protocol ensures a frictionless mobile experience, allowing the browser/operating system to initiate the call natively.
+**Action:** When creating telephone contact buttons, use a semantic `<a>` element with a `tel:` href instead of a button with an onClick. Always complement with clear ARIA labels indicating the target name and phone number for screen-reader users, and provide visible focus rings to maintain keyboard accessibility.
