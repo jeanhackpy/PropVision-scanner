@@ -1,0 +1,3 @@
+## 2024-07-24 - Keyboard Accessibility on Simulated Map and Handles
+**Learning:** Adding a tabIndex and keyboard handlers (Enter/Space) to interactive elements like custom map views and bottom sheet handles dramatically elevates the visual exploration flow for keyboard-only and screen reader users. It's critical to provide an fallback interaction (like placing a pin at center coordinates `50, 50` on keyboard click) when precise mouse pointer coordinates are missing, and to use `e.preventDefault()` to stop standard browser scrolling behaviors.
+**Action:** Always provide custom coordinate fallbacks for canvas/SVG-based maps when triggered by focus/keyboard, and accompany visual handles with interactive roles, `aria-label`, and `focus-visible:ring-inset` styling.
