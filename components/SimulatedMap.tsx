@@ -16,8 +16,23 @@ const SimulatedMap: React.FC<SimulatedMapProps> = ({ onPinDrop, isPinDropped, pi
     onPinDrop(x, y);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      // Drop a pin in the center of the view for keyboard users
+      onPinDrop(50, 50);
+    }
+  };
+
   return (
-    <div className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair" onClick={handleMapClick}>
+    <div
+      className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-indigo-500 outline-none"
+      onClick={handleMapClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label={isPinDropped ? "Ajuster la zone de recherche sur la carte" : "Placer un repère de recherche sur la carte"}
+    >
       {/* Background simulating a map style */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
