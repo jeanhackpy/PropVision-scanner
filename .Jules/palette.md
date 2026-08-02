@@ -1,0 +1,3 @@
+## 2025-08-02 - Native Contact Actions for Property Agents
+**Learning:** Replacing generic static click handlers or non-functional contact buttons with native semantic anchors (`tel:` or `mailto:`) ensures a superior mobile UX. Users can instantly invoke their device's native dialer or email client, which is a major UX delight compared to plain text elements or unresponsive buttons. Incorporating correct `aria-label` content and focus visible states completes the accessibility loop.
+**Action:** Always prefer native semantic components for action-oriented links like phone numbers and email addresses, and style them to be keyboard-accessible with appropriate focus ring indicators.
