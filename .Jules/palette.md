@@ -1,0 +1,3 @@
+## 2025-02-26 - Semantic Mobile Accessibility for Contact Cards
+**Learning:** Placeholders like generic button elements for contact/calling actions lack semantic meaning on mobile devices and screen readers. Replacing them with anchor links using the `tel:` protocol allows screen readers to clearly announce the interactive telephonic context, and enables native OS phone dialers to trigger immediately.
+**Action:** Always wrap telephonic or communication actions inside semantic `<a>` tags with `tel:` or `mailto:` schemas and configure accessible keyboard focus rings (`focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none`) to guarantee seamless mobility and full screen-reader support.
