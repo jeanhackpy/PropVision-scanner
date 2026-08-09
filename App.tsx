@@ -49,26 +49,43 @@ function App() {
 
       try {
         const analysis = await analyzeBuildingImage(base64Data);
+        if (!analysis) {
+          throw new Error("Missing or invalid API key, fallback to simulation");
+        }
         setAnalysisResult(analysis);
         
-        if (analysis) {
-            // Find agents that match the detected style
-            const matchedAgents = MOCK_AGENTS.filter(agent => 
-                agent.specialty.some(s => analysis.architecturalStyle.includes(s) || analysis.luxuryLevel === 'Luxe')
-            ).sort((a, b) => b.rating - a.rating);
-            
-            setBuildingAgents(matchedAgents);
+        const matchedAgents = MOCK_AGENTS.filter(agent =>
+            agent.specialty.some(s => analysis.architecturalStyle.includes(s) || analysis.luxuryLevel === 'Luxe')
+        ).sort((a, b) => b.rating - a.rating);
+        setBuildingAgents(matchedAgents);
 
-            // Find properties that might be in this building (simulated by style)
-            const matchedProps = MOCK_PROPERTIES.filter(p => 
-                p.buildingType === analysis.architecturalStyle || 
-                (analysis.luxuryLevel === 'Luxe' && p.buildingType === 'Luxe')
-            );
-            setProperties(matchedProps);
-        }
+        const matchedProps = MOCK_PROPERTIES.filter(p =>
+            p.buildingType === analysis.architecturalStyle ||
+            (analysis.luxuryLevel === 'Luxe' && p.buildingType === 'Luxe')
+        );
+        setProperties(matchedProps);
 
       } catch (e) {
-        console.error("Error analyzing image", e);
+        console.error("Error analyzing image, falling back to mock analysis", e);
+        const mockAnalysis: BuildingAnalysis = {
+          architecturalStyle: 'Haussmannien',
+          estimatedEra: '19ème siècle (Second Empire)',
+          condition: 'Excellent / Rénové',
+          luxuryLevel: 'Luxe',
+          detectedFeatures: ['Façade en pierre de taille', 'Balcons filants', 'Moulures et corniches', 'Grandes fenêtres']
+        };
+        setAnalysisResult(mockAnalysis);
+
+        const matchedAgents = MOCK_AGENTS.filter(agent =>
+            agent.specialty.some(s => mockAnalysis.architecturalStyle.includes(s) || mockAnalysis.luxuryLevel === 'Luxe')
+        ).sort((a, b) => b.rating - a.rating);
+        setBuildingAgents(matchedAgents);
+
+        const matchedProps = MOCK_PROPERTIES.filter(p =>
+            p.buildingType === mockAnalysis.architecturalStyle ||
+            (mockAnalysis.luxuryLevel === 'Luxe' && p.buildingType === 'Luxe')
+        );
+        setProperties(matchedProps);
       } finally {
         setIsAnalyzing(false);
       }
