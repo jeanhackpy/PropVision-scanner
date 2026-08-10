@@ -1,0 +1,5 @@
+## 2025-08-10 - Semantic Contact Actions & Robust API Fallbacks
+
+**Learning:** When creating elements representing contact numbers, using a semantic anchor `<a>` with a `tel:` protocol provides a significantly better user experience than a static `<button>`, enabling immediate, native interaction on mobile and desktop devices. Additionally, adding an `aria-label` to these links correctly provides screen readers with context (e.g. "Appeler Sophie Martin au ..."), but it is critical to remember that this label replaces the element's default accessible text in automated locators. Finally, creating clear error-state fallbacks for complex third-party API integrations (like Gemini AI) prevents application lockup and keeps critical feature loops fully operational.
+
+**Action:** Always prefer semantic anchor tags with `tel:` or `mailto:` protocols for direct user communication links. When testing, locate accessible elements by their custom `aria-label` rather than their visual label. Ensure that all interactive async features have instant mock simulation catch blocks to provide a resilient, fail-proof UX.
