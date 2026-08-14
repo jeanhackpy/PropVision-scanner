@@ -7,6 +7,8 @@ interface AgentCardProps {
 }
 
 const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
+  const formattedPhone = agent.phone.replace(/\s+/g, '');
+
   return (
     <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4">
       <div className="relative">
@@ -39,10 +41,14 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           ))}
         </div>
 
-        <button className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
+        <a
+          href={`tel:${formattedPhone}`}
+          aria-label={`Contacter ${agent.name} au ${agent.phone}`}
+          className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none transition-colors"
+        >
           <Phone className="w-3 h-3" />
           Contacter
-        </button>
+        </a>
       </div>
     </div>
   );
