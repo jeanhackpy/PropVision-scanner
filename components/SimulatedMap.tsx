@@ -16,10 +16,24 @@ const SimulatedMap: React.FC<SimulatedMapProps> = ({ onPinDrop, isPinDropped, pi
     onPinDrop(x, y);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onPinDrop(50, 50);
+    }
+  };
+
   return (
-    <div className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair" onClick={handleMapClick}>
+    <div
+      role="button"
+      tabIndex={0}
+      aria-label="Carte interactive. Cliquez ou appuyez sur Entrée pour définir la zone d'intérêt."
+      className="relative w-full h-full bg-slate-200 overflow-hidden group cursor-crosshair focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-inset outline-none"
+      onClick={handleMapClick}
+      onKeyDown={handleKeyDown}
+    >
       {/* Background simulating a map style */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
+      <div className="absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -60,7 +74,7 @@ const SimulatedMap: React.FC<SimulatedMapProps> = ({ onPinDrop, isPinDropped, pi
       <div className="absolute top-[60%] left-[70%] text-slate-400 pointer-events-none"><div className="w-2 h-2 bg-slate-400 rounded-full"></div></div>
       
       {/* User location indicator */}
-      <div className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg text-indigo-600 pointer-events-none">
+      <div className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg text-indigo-600 pointer-events-none" aria-hidden="true">
         <Navigation className="w-5 h-5 fill-current" />
       </div>
     </div>
