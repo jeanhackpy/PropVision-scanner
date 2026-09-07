@@ -39,10 +39,14 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           ))}
         </div>
 
-        <button className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
+        <a
+          href={`tel:${agent.phone.replace(/\s+/g, '')}`}
+          aria-label={`Contacter ${agent.name} par téléphone`}
+          className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 outline-none"
+        >
           <Phone className="w-3 h-3" />
           Contacter
-        </button>
+        </a>
       </div>
     </div>
   );
