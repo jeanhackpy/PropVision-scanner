@@ -17,7 +17,7 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
         />
         {agent.isElite && (
           <div className="absolute -bottom-1 -right-1 bg-amber-500 text-white p-1 rounded-full border-2 border-white" title="Agent Elite">
-            <ShieldCheck className="w-3 h-3" />
+            <ShieldCheck className="w-3 h-3" aria-hidden="true" />
           </div>
         )}
       </div>
@@ -26,7 +26,7 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
         <div className="flex justify-between items-start">
           <h4 className="font-bold text-slate-800">{agent.name}</h4>
           <div className="flex items-center text-amber-500 text-sm font-bold">
-            <Star className="w-3 h-3 fill-current mr-1" />
+            <Star className="w-3 h-3 fill-current mr-1" aria-hidden="true" />
             {agent.rating} <span className="text-slate-400 font-normal text-xs ml-1">({agent.reviewCount})</span>
           </div>
         </div>
@@ -39,10 +39,14 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           ))}
         </div>
 
-        <button className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
-          <Phone className="w-3 h-3" />
+        <a
+          href={`tel:${agent.phone}`}
+          aria-label={`Contacter ${agent.name} au ${agent.phone}`}
+          className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-1 transition-colors"
+        >
+          <Phone className="w-3 h-3" aria-hidden="true" />
           Contacter
-        </button>
+        </a>
       </div>
     </div>
   );
