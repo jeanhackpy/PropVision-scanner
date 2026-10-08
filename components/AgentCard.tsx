@@ -16,7 +16,12 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           className="w-16 h-16 rounded-full object-cover border-2 border-indigo-100"
         />
         {agent.isElite && (
-          <div className="absolute -bottom-1 -right-1 bg-amber-500 text-white p-1 rounded-full border-2 border-white" title="Agent Elite">
+          <div
+            className="absolute -bottom-1 -right-1 bg-amber-500 text-white p-1 rounded-full border-2 border-white"
+            title="Agent Élite"
+            aria-label="Agent Élite"
+            role="img"
+          >
             <ShieldCheck className="w-3 h-3" />
           </div>
         )}
@@ -39,10 +44,14 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           ))}
         </div>
 
-        <button className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
+        <a
+          href={`tel:${agent.phone.replace(/\s+/g, '')}`}
+          aria-label={`Appeler ${agent.name} au ${agent.phone}`}
+          className="w-full text-center text-xs bg-slate-900 text-white py-1.5 rounded flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 outline-none"
+        >
           <Phone className="w-3 h-3" />
           Contacter
-        </button>
+        </a>
       </div>
     </div>
   );
